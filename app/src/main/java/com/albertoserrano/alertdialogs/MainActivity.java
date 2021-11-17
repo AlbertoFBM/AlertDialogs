@@ -4,9 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 clickAlertDialog(view);
             }
         });
@@ -35,10 +38,34 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setMessage("¿Seguro que quieres salir?");
 
-        builder.setPositiveButton("Aceptar", null);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                aceptar();
+            }
+        });
 
-        builder.setNegativeButton("Cancelar", null);
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                cancelar();
+            }
+        });
 
         builder.show();
+    }
+
+    private void aceptar(){
+
+        finish();
+
+    }
+
+    private void cancelar(){
+
+        TextView tCancelar = findViewById(R.id.textView);
+
+        tCancelar.setText("Gracias por no pulsar ACEPTAR");
+
     }
 }
